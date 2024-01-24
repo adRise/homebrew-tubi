@@ -1,5 +1,7 @@
 # AdRise Tubi
 
+**this is a public clone. don't put too many things in here**
+
 ## How do I install these formulae?
 
 `brew install adrise/tubi/<formula>`
