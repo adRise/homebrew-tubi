@@ -2,7 +2,7 @@ class RancherCli < Formula
   desc "Unified tool to manage your Rancher server(Tubi)"
   homepage "https://github.com/rancher/cli"
   license "Apache-2.0"
-  head "https://github.com/adRise/rancher_cli.git", tag: "v2.7.7-tubi"
+  head "https://github.com/adRise/rancher_cli.git", branch: "v2.7.7-tubi"
 
   livecheck do
     url :stable
