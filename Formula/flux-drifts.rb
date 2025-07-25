@@ -10,13 +10,12 @@ class FluxDrifts < Formula
     # Ensure Go modules are set up
     system "go", "mod", "tidy"
     
-    # Fetch tags to get proper version information for head builds
-    system "git", "fetch", "--tags", "--force" if build.head?
+    # Use available git information for version (no fetch needed)
     
     # Set version information for head builds
     build_time = Time.now.utc.strftime("%Y-%m-%dT%H:%M:%SZ")
     git_commit = Utils.safe_popen_read("git", "rev-parse", "HEAD").chomp rescue "unknown"
-    version_string = Utils.safe_popen_read("git", "describe", "--tags", "--always").chomp rescue "head"
+    version_string = "HEAD"
 
     # Build time ldflags
     ldflags = [
