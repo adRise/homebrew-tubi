@@ -56,15 +56,12 @@ class FluxDrifts < Formula
       
       Examples:
         # Check all drifts and display results
-        flux-drifts --show
-        
-        # Start web server on port 8080
-        flux-drifts --server --port 8080
+        flux-drifts
         
         # Enable verbose logging
-        flux-drifts --server --verbose
+        flux-drifts --verbose
       
       For more information, visit: https://github.com/adRise/flux-drifts
     EOS
   end
-end 
+end
