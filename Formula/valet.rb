@@ -6,10 +6,6 @@ class Valet < Formula
   depends_on "go" => :build
 
   def install
-    if build.head?
-      system "git", "fetch", "--tags"
-    end
-
     system "make", "build"
     bin.install "bin/valet"
   end
