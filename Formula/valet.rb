@@ -12,10 +12,16 @@ class Valet < Formula
   depends_on "go" => :build
 
   def install
-    # Homebrew clones --branch main by default, which fetches the branch
-    # tip but not necessarily every tag. Fetch tags explicitly so
-    # `git describe --tags` in the Makefile picks up the latest release.
-    system "git", "fetch", "--tags" if build.head?
+    # Homebrew clones --single-branch by default, which does not fetch
+    # tags. Pull them in so `git describe --tags` in the Makefile can
+    # produce a version like `v6.4.0-2-gabc1234`. Run with
+    # GIT_TERMINAL_PROMPT=0 and quiet_system so a failed fetch (e.g.
+    # no credentials in the install environment) silently falls back
+    # to the short-SHA version — no worse than before this change.
+    if build.head?
+      ENV["GIT_TERMINAL_PROMPT"] = "0"
+      quiet_system "git", "fetch", "--tags"
+    end
 
     system "make", "build"
     bin.install "bin/valet"
