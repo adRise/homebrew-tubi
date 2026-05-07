@@ -12,15 +12,15 @@ class Valet < Formula
   depends_on "go" => :build
 
   def install
-    # Homebrew clones --single-branch by default, which does not fetch
-    # tags. Pull them in so `git describe --tags` in the Makefile can
-    # produce a version like `v6.4.0-2-gabc1234`. Run with
-    # GIT_TERMINAL_PROMPT=0 and quiet_system so a failed fetch (e.g.
-    # no credentials in the install environment) silently falls back
-    # to the short-SHA version — no worse than before this change.
+    # Homebrew's cached HEAD clone is configured with a fetch refspec
+    # that doesn't pull tags, so `brew upgrade --fetch-HEAD` leaves
+    # the local tag refs stuck at whatever existed on first install.
+    # Fetch tags with an explicit, forced refspec each install so
+    # `git describe --tags` in the Makefile finds the current release
+    # and produces a version like `v6.4.0-2-gabc1234`.
     if build.head?
       ENV["GIT_TERMINAL_PROMPT"] = "0"
-      quiet_system "git", "fetch", "--tags"
+      quiet_system "git", "fetch", "origin", "+refs/tags/*:refs/tags/*"
     end
 
     system "make", "build"
