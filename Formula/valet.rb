@@ -12,16 +12,19 @@ class Valet < Formula
   depends_on "go" => :build
 
   def install
-    # Homebrew's HEAD flow clones main-only into a cache, then re-clones
-    # from that cache into this staging dir — so `origin` here points at
-    # the cache, which has no tags. Point origin back at GitHub and
-    # fetch tags directly, so `git describe --tags` in the Makefile can
-    # produce a version like `v6.4.0-2-gabc1234` on every upgrade.
+    # Homebrew's HEAD clone sets remote.origin.fetch to only pull
+    # refs/heads/main, so tags never arrive via the default fetch.
+    # Fetch them from GitHub directly (bypassing the configured
+    # refspec) so `git describe --tags` in the Makefile can produce
+    # a version like `v6.4.0-2-gabc1234` on every upgrade.
+    #
+    # Use `system` (not `quiet_system`) so any fetch error is visible
+    # in brew's output — a previous silent failure was exactly how
+    # this bug went undetected.
     if build.head?
       ENV["GIT_TERMINAL_PROMPT"] = "0"
-      quiet_system "git", "remote", "set-url", "origin",
-        "https://github.com/adRise/valet-go.git"
-      quiet_system "git", "fetch", "origin", "+refs/tags/*:refs/tags/*"
+      system "git", "fetch", "https://github.com/adRise/valet-go.git",
+        "+refs/tags/*:refs/tags/*"
     end
 
     system "make", "build"
