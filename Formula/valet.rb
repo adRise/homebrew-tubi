@@ -11,7 +11,12 @@ class Valet < Formula
   depends_on "go" => :build
 
   def install
-    system "make", "build"
+    version_str = if build.head?
+      "HEAD-#{Utils.safe_popen_read("git", "rev-parse", "--short", "HEAD").strip}"
+    else
+      "v#{version}"
+    end
+    system "make", "build", "VERSION=#{version_str}"
     bin.install "bin/valet"
   end
 
