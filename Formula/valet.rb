@@ -1,12 +1,12 @@
 class Valet < Formula
   desc "Credentials management tool for AWS SSO authentication and profile management"
   homepage "https://github.com/adRise/valet-go"
-  url "https://github.com/adRise/valet-go.git",
+  url "git@github.com:adRise/valet-go.git",
       tag:      "v6.6.1",
       revision: "f1ab7687df39d73e241ea2e24bfe6e4cf0699fad"
   version "6.6.1"
 
-  head "https://github.com/adRise/valet-go.git", branch: "main"
+  head "git@github.com:adRise/valet-go.git", branch: "main"
 
   depends_on "go" => :build
 
