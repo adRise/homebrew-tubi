@@ -10,6 +10,7 @@ class Valet < Formula
   head "ssh://git@github.com/adRise/valet-go.git", branch: "main", using: :git
 
   depends_on "go" => :build
+  depends_on "just" => :build
 
   def install
     version_str = if build.head?
@@ -17,7 +18,7 @@ class Valet < Formula
     else
       "v#{version}"
     end
-    system "make", "build", "VERSION=#{version_str}"
+    system "just", "--set", "version", version_str, "build"
     bin.install "bin/valet"
   end
 
