@@ -3,7 +3,7 @@ class Valet < Formula
   homepage "https://github.com/adRise/valet-go"
   url "ssh://git@github.com/adRise/valet-go.git",
       tag:      "v6.7.2",
-      revision: "bfb189a2b9792cce08733baed7716c8714bd8b68",
+      revision: "75feb367603fb2943c7012acac73e2411f419f68",
       using:    :git
   version "6.7.2"
 
