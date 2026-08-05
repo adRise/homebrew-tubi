@@ -22,6 +22,15 @@ class Valet < Formula
     bin.install "bin/valet"
   end
 
+  def caveats
+    <<~EOS
+      The Go valet has been renamed to kato and is frozen at v6.7.2 —
+      all new features land in kato only:
+        brew install adrise/tubi/kato
+      Your installed valet keeps working; switch at your own pace.
+    EOS
+  end
+
   test do
     system "#{bin}/valet", "--version"
   end
