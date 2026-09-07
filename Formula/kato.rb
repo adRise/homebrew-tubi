@@ -2,10 +2,10 @@ class Kato < Formula
   desc "Cloud provider access tool for Tubi engineers (successor to valet)"
   homepage "https://github.com/adRise/kato"
   url "ssh://git@github.com/adRise/kato.git",
-      tag:      "v1.4.0",
-      revision: "a58a328cf7f338fd11c77a7c0aaddbc668e262e4",
+      tag:      "v1.4.1",
+      revision: "9047a1f204e38ca0df120ef3f53126b82d64cd87",
       using:    :git
-  version "1.4.0"
+  version "1.4.1"
 
   head "ssh://git@github.com/adRise/kato.git", branch: "main", using: :git
 
