@@ -9,6 +9,8 @@ class Valet < Formula
 
   head "ssh://git@github.com/adRise/valet-go.git", branch: "main", using: :git
 
+  deprecate! date: "2026-09-08", because: "was renamed to kato", replacement_formula: "adrise/tubi/kato"
+
   depends_on "go" => :build
   depends_on "just" => :build
 
@@ -24,10 +26,10 @@ class Valet < Formula
 
   def caveats
     <<~EOS
-      The Go valet has been renamed to kato and is frozen at v6.7.2 —
-      all new features land in kato only:
+      valet is deprecated — it has been renamed to kato and is frozen
+      at v6.7.2. All new features land in kato only:
         brew install adrise/tubi/kato
-      Your installed valet keeps working; switch at your own pace.
+      Your installed valet keeps working, but please switch to kato.
     EOS
   end
 
